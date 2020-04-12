@@ -149,6 +149,13 @@ class _TitlePLayState extends State<TitlePLay> with SingleTickerProviderStateMix
                 this.isPlaying = true; 
                 audioPLayerModel.controller.repeat();
               }
+
+              if(firstTime){
+                this.open();
+                firstTime = false;
+              }else {
+                assetAudioPlayer.playOrPause();
+              }
             },
           )
         ],
@@ -183,10 +190,13 @@ class BarProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final styles = TextStyle(color: Colors.white.withOpacity(0.4));
+    final audioPlayerModel = Provider.of<AudioPlayerModel>(context);
+    final porcent = audioPlayerModel.porcent;
+
 
     return Container(
       child: Column(children: <Widget>[
-        Text('00:00', style: styles),
+        Text('${audioPlayerModel.songTotalDuration}', style: styles),
         SizedBox(
           height: 10,
         ),
@@ -203,7 +213,7 @@ class BarProgress extends StatelessWidget {
               bottom: 0,
               child: Container(
                 width: 3,
-                height: 180,
+                height: 230 * porcent,
                 color: Colors.white.withOpacity(0.8),
               ),
             )
@@ -212,7 +222,7 @@ class BarProgress extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        Text('00:00', style: styles),
+        Text('${audioPlayerModel.currentSecond}', style: styles),
       ]),
     );
   }
