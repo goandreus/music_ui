@@ -69,7 +69,27 @@ class Lyrics extends StatelessWidget {
   }
 }
 
-class TitlePLay extends StatelessWidget {
+class TitlePLay extends StatefulWidget {
+  @override
+  _TitlePLayState createState() => _TitlePLayState();
+}
+
+class _TitlePLayState extends State<TitlePLay> with SingleTickerProviderStateMixin {
+
+  bool isPlaying = false;
+  AnimationController playanimation;
+
+  @override
+  void initState(){
+    playanimation = AnimationController(vsync: this, duration: Duration(microseconds: 500));
+    super.initState(); 
+  }
+  @override
+  void dispose(){
+    this.playanimation.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -93,8 +113,18 @@ class TitlePLay extends StatelessWidget {
             elevation: 0,
             highlightElevation: 0,
             backgroundColor: Color(0xffF8CB51),
-            child: Icon(Icons.play_arrow),
-            onPressed: () {},
+            child: AnimatedIcon(
+              icon: AnimatedIcons.play_pause, 
+              progress: playanimation ,),
+            onPressed: () {
+              if(this.isPlaying){
+                playanimation.reverse(); 
+                this.isPlaying = false;
+              }else{
+                playanimation.forward(); 
+                this.isPlaying = true;
+              }
+            },
           )
         ],
       ),
