@@ -5,7 +5,46 @@ class MusicPlayerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: <Widget>[CustomAppBar(), ImageDiscoDuration()]),
+      body: Column(children: <Widget>[
+        CustomAppBar(),
+        ImageDiscoDuration(),
+        TitlePLay(),
+      ]),
+    );
+  }
+}
+
+class TitlePLay extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 50),
+      margin: EdgeInsets.only(top: 40),
+      child: Row(
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Text('Far Away',
+                  style: TextStyle(
+                      fontSize: 30, color: Colors.white.withOpacity(0.8))),
+              Text('-Breaking Benjamin-',
+                  style: TextStyle(
+                      fontSize: 15, color: Colors.white.withOpacity(0.8))),
+            ],
+          ),
+          Spacer(),
+          FloatingActionButton(
+            //prevent the button from rising
+            elevation: 0,
+            highlightElevation: 0,
+            backgroundColor: Color(0xffF8CB51),
+            child: Icon(Icons.play_arrow),
+            onPressed: (){
+
+            },
+          )
+        ],
+      ),
     );
   }
 }
@@ -14,56 +53,59 @@ class ImageDiscoDuration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal:30),
-      margin: EdgeInsets.only(top:70),
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      margin: EdgeInsets.only(top: 70),
       child: Row(
         children: <Widget>[
           ImageDisco(),
-          SizedBox(width: 20,),
-
+          SizedBox(
+            width: 20,
+          ),
           BarProgress(),
-          SizedBox(width: 20,),
-
-          ],
+          SizedBox(
+            width: 20,
+          ),
+        ],
       ),
     );
   }
 }
 
 class BarProgress extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
-
     final styles = TextStyle(color: Colors.white.withOpacity(0.4));
 
     return Container(
-      child: Column(
-        children: <Widget>[
-          Text('00:00', style: styles),
-          SizedBox(height: 10,),
-          Stack(
-            children: <Widget>[
-              Container(
-                width: 3,
-                height: 230,
-                color: Colors.white.withOpacity(0.1),
-              ),
-              Positioned(
-                bottom: 0,
-                              child: Container(
-                  width: 3,
-                  height: 180,
-                  color: Colors.white.withOpacity(0.8),
-                ),
-              )
-            ],
-          ),
-         SizedBox(height: 10,),
-          Text('00:00', style: styles),
+      child: Column(children: <Widget>[
+        Text('00:00', style: styles),
+        SizedBox(
+          height: 10,
+        ),
+        Stack(
+          children: <Widget>[
+            Container(
+              width: 3,
+              height: 230,
+              color: Colors.white.withOpacity(0.1),
+            ),
 
-        ]
-      ),
+            //inverse position stack order
+            Positioned(
+              bottom: 0,
+              child: Container(
+                width: 3,
+                height: 180,
+                color: Colors.white.withOpacity(0.8),
+              ),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text('00:00', style: styles),
+      ]),
     );
   }
 }
