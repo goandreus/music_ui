@@ -128,7 +128,7 @@ class _TitlePLayState extends State<TitlePLay> with SingleTickerProviderStateMix
                 audioPLayerModel.controller.stop();
               }else{
                 playanimation.forward(); 
-                this.isPlaying = true;
+                this.isPlaying = true; 
                 audioPLayerModel.controller.repeat();
               }
             },
